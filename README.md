@@ -1,1 +1,3 @@
-# otv-fire-suppression
+# Fire Suppression Over Terrain Vehicle
+
+This is a project for the course semester long course ENES100 at the University of Maryland. The project is a fire suppression vehicle that can traverse an obstacle course. The vehicle is controlled by an Arduino and uses a variety of sensors to navigate and detect fires. The vehicle is also equipped with a fire suppression system that can be activated when a fire is detected.
