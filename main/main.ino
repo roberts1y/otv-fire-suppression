@@ -1,4 +1,5 @@
 #include "DHT.h"            // Include the DHT sensor library
+#include "MotorControl.h"
 
 // Define the pin for the DHT22 data line and the LED
 #define DHTPIN 4
@@ -13,6 +14,7 @@ DHT dht(DHTPIN, DHTTYPE);
 float prevTemperature = NAN; // NAN indicates that we haven't taken a reading yet
 
 void setup() {
+  setupMotors();
   Serial.begin(9600);       // Start serial communication at 9600 baud
   dht.begin();              // Initialize the DHT sensor
   pinMode(LED_PIN, OUTPUT); // Set the LED pin as output
