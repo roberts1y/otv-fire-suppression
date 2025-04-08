@@ -4,11 +4,12 @@
 #include "Tank.h"
 
 const float positionTolerance = 0.1;  // meters
-const float obstacleTolerance = 0.005;
+const float obstacleTolerance = 5; //cm
 const float angleTolerance = 0.1;      // radians
 
-float lastX = 0, lastY = 0;       // To track position
-bool moved = false;
+const int trigPin3 = 4;
+const int echoPin3 = 5;
+
 
 void setup() {
     Enes100.begin("Simulator", FIRE, 3, 8, 9);
@@ -45,13 +46,6 @@ void goToPoint(float targetX, float targetY) {
         float angleToTarget = atan2(dy, dx);
         float dTheta = angleToTarget - theta;
 
-        // Normalize the angle difference to the range [-pi, pi]
-        if (dTheta > PI) {
-            dTheta -= 2 * PI;
-        } else if (dTheta < -PI) {
-            dTheta += 2 * PI;
-        }
-
         // Adjust rotation speed based on how far the robot is from the target angle
         if (abs(dTheta) > angleTolerance) {
             // Robot needs to turn
@@ -68,66 +62,13 @@ void goToPoint(float targetX, float targetY) {
             Tank.setRightMotorPWM(255);
             moved = true;  // Full speed forward
         }
+
+        if(getDistance(trigPin3, echoPin3, 1) < obstacleTolerance){
+
+            avoidObstacle();        
+        }
         
-        
-        // Monitor progress and obstacle detection
-        if(moved) {
-            if (isStuck(x, y)) {
-                // Assume obstacle encountered, perform avoidance
-                avoidObstacle();
-                continue;  // Skip current loop and check again after avoidance
-            }
-        }
-        moved = false;
     }
-
-    // === Rotate to face 0 radians ===
-    while (true) {
-        float theta = Enes100.getTheta();
-        float dTheta = -theta;  // we want theta → 0
-
-        if (abs(dTheta) < angleTolerance) {
-            Tank.setLeftMotorPWM(0);
-            Tank.setRightMotorPWM(0);
-            Enes100.println("Oriented to 0 radians.");
-            break;
-        }
-
-        int turnSpeed = 0;
-
-        if (abs(dTheta) > 0.5) {
-            turnSpeed = 255;  // fast turn
-        } else if (abs(dTheta) > 0.2) {
-            turnSpeed = 150;  // medium turn
-        } else {
-            turnSpeed = 100;   // fine turn
-        }
-
-        if (dTheta > 0) {
-            Tank.setLeftMotorPWM(-turnSpeed);
-            Tank.setRightMotorPWM(turnSpeed);
-        } else {
-            Tank.setLeftMotorPWM(turnSpeed);
-            Tank.setRightMotorPWM(-turnSpeed);
-        }
-
-        delay(50);  // tighter control loop
-    }
-}
-
-// === Check if the robot is stuck (not moving enough) ===
-bool isStuck(float currentX, float currentY) {
-    // Check if position hasn't changed enough
-    if ((abs(currentX - lastX) < obstacleTolerance || abs(currentY - lastY) < obstacleTolerance)) {
-        Enes100.println("Robot is stuck, assuming obstacle encountered.");
-        return true;
-    }
-
-    // Update position and time for next check
-    lastX = currentX;
-    lastY = currentY;
-
-    return false;  // Robot is not stuck
 }
 
 // === Perform basic obstacle avoidance maneuver ===
