@@ -1,5 +1,5 @@
-#ifndef "temp
-#include temp.ino
+#ifndef TEMP_H
+#define TEMP_H
 
 void setup(){
   
