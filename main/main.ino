@@ -4,8 +4,8 @@
 #include "MotorControl.h"
 #include <math.h>
 
-const int TXPin = 0;
-const int RXPin = 1;
+const int TXPin = 18;
+const int RXPin = 19;
 
 void setup() {
   // Initialize ENES100 system
