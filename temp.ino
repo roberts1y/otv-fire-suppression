@@ -14,11 +14,6 @@ DHT dht2(DHTPIN2, DHTTYPE);
 DHT dht3(DHTPIN3, DHTTYPE);
 DHT dht4(DHTPIN4, DHTTYPE);
 
-// Variable to store the previous temperature readings
-float prevTemperature1 = NAN;  // NAN indicates that we haven't taken a reading yet
-float prevTemperature2 = NAN;  // NAN indicates that we haven't taken a reading yet
-float prevTemperature3 = NAN;  // NAN indicates that we haven't taken a reading yet
-float prevTemperature4 = NAN;  // NAN indicates that we haven't taken a reading yet
 
 // Function to print temperature
 void printTemp1(float currentTemperature1) {
@@ -47,7 +42,12 @@ void printTemp4(float currentTemperature4) {
 
 // Fire detection function
 void fireDetection() {
-  // Wait at least 2 seconds between sensor readings
+
+  // Variable to store the previous temperature readings
+float prevTemperature1 = NAN;  // NAN indicates that we haven't taken a reading yet
+float prevTemperature2 = NAN;  // NAN indicates that we haven't taken a reading yet
+float prevTemperature3 = NAN;  // NAN indicates that we haven't taken a reading yet
+float prevTemperature4 = NAN;  // NAN indicates that we haven't taken a reading yet
 
   // Read temperatures in Celsius
   float currentTemperature1 = dht1.readTemperature();
