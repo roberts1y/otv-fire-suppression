@@ -1,25 +1,27 @@
 #include <Arduino.h>
 #include "MotorControl.h"
 
+// Define motor pins
+
 // Left Front Motor
-const int LF_IN1 = 2;
-const int LF_IN2 = 3;
-const int LF_EN  = 5;  // changed from 1 to 5 (PWM-capable)
+const int LF_IN1 = 26;
+const int LF_IN2 = 24;
+const int LF_EN  = 2;
 
 // Left Rear Motor
-const int LR_IN1 = 4;
-const int LR_IN2 = 5;
-const int LR_EN  = 6;
+const int LR_IN1 = 33;
+const int LR_IN2 = 31;
+const int LR_EN  = 3;
 
 // Right Front Motor
-const int RF_IN1 = 12;
-const int RF_IN2 = 13;
-const int RF_EN  = 11;
+const int RF_IN1 = 30;
+const int RF_IN2 = 32;
+const int RF_EN  = 5;
 
 // Right Rear Motor
-const int RR_IN1 = 8;
-const int RR_IN2 = 9;
-const int RR_EN  = 10;
+const int RR_IN1 = 35;
+const int RR_IN2 = 34;
+const int RR_EN  = 4;
 
 void setupMotors() {
   // Set all motor control pins as outputs
