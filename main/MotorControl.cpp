@@ -14,8 +14,8 @@ const int LR_IN2 = 31;
 const int LR_EN  = 3;
 
 // Right Front Motor
-const int RF_IN1 = 30;
-const int RF_IN2 = 32;
+const int RF_IN1 = 32;
+const int RF_IN2 = 30;
 const int RF_EN  = 5;
 
 // Right Rear Motor
