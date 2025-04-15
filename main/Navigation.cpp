@@ -6,8 +6,8 @@ const float positionTolerance = 0.1;  // meters
 const float obstacleTolerance = 5; //cm
 const float angleTolerance = 0.1;      // radians
 
-const int trigPin3 = 4;
-const int echoPin3 = 5;
+const int trigPin3 = 8;
+const int echoPin3 = 9;
 
 
 // Move to (targetX, targetY) and face 0 radians
