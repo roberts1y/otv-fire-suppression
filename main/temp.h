@@ -7,6 +7,8 @@ float prevTemperature2 = NAN;  // NAN indicates that we haven't taken a reading 
 float prevTemperature3 = NAN;  // NAN indicates that we haven't taken a reading yet
 float prevTemperature4 = NAN;  // NAN indicates that we haven't taken a reading yet
 
+void definePINS();
+void beginDHT();
 void printTemp1();
 void printTemp2();
 void printTemp3();
