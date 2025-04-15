@@ -1,8 +1,10 @@
 #ifndef TEMP_H
 #define TEMP_H
 
-void fireDetection();{
-  
-}
+void printTemp1();
+void printTemp2();
+void printTemp3();
+void printTemp4();
+void fireDetection();
 
 #endif
