@@ -42,14 +42,9 @@ void printTemp4(float currentTemperature4) {
 
 // Fire detection function
 void fireDetection() {
-
-  // Variable to store the previous temperature readings
-float prevTemperature1 = NAN;  // NAN indicates that we haven't taken a reading yet
-float prevTemperature2 = NAN;  // NAN indicates that we haven't taken a reading yet
-float prevTemperature3 = NAN;  // NAN indicates that we haven't taken a reading yet
-float prevTemperature4 = NAN;  // NAN indicates that we haven't taken a reading yet
-
-  // Read temperatures in Celsius
+ int fireCount=0;
+  
+    // Read temperatures in Celsius
   float currentTemperature1 = dht1.readTemperature();
   float currentTemperature2 = dht2.readTemperature();
   float currentTemperature3 = dht3.readTemperature();
@@ -63,6 +58,7 @@ float prevTemperature4 = NAN;  // NAN indicates that we haven't taken a reading 
     Serial.println("Temp1 reading not acquired.");
   } else {
     if (currentTemperature1 > prevTemperature1) {
+      fireCount++;
       Serial.println("Temp1 increased!");
     } else {
       Serial.println("Temp1 did not increase.");
@@ -76,6 +72,7 @@ float prevTemperature4 = NAN;  // NAN indicates that we haven't taken a reading 
     Serial.println("Temp2 reading not acquired.");
   } else {
     if (currentTemperature2 > prevTemperature2) {
+      fireCount++;
       Serial.println("Temp2 increased!");
     } else {
       Serial.println("Temp2 did not increase.");
@@ -89,6 +86,7 @@ float prevTemperature4 = NAN;  // NAN indicates that we haven't taken a reading 
     Serial.println("Temp3 reading not acquired.");
   } else {
     if (currentTemperature3 > prevTemperature3) {
+      fireCount++;
       Serial.println("Temp3 increased!");
     } else {
       Serial.println("Temp3 did not increase.");
@@ -99,6 +97,7 @@ float prevTemperature4 = NAN;  // NAN indicates that we haven't taken a reading 
 
   if (isnan(prevTemperature4)) {
     prevTemperature4 = currentTemperature4;
+    fireCount++;
     Serial.println("Temp4 reading not acquired.");
   } else {
     if (currentTemperature4 > prevTemperature4) {
@@ -119,7 +118,7 @@ float prevTemperature4 = NAN;  // NAN indicates that we haven't taken a reading 
 
 void setup() {
   // Initial setup is done in fireDetection() and serial communication
-    dht1.begin();  // Initialize the DHT sensors
+  dht1.begin();  // Initialize the DHT sensors
   dht2.begin();
   dht3.begin();
   dht4.begin();
