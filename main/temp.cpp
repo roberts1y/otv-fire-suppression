@@ -1,6 +1,8 @@
 #include "DHT.h"  // Include the DHT sensor library
 
-// Define the pin for the DHT22 data line and the LED
+
+void defineDHTPINS(){
+  // Define the pin for the DHT22 data line and the LED
 #define DHTPIN1 5
 #define DHTPIN2 6
 #define DHTPIN3 9
@@ -13,7 +15,19 @@ DHT dht1(DHTPIN1, DHTTYPE);
 DHT dht2(DHTPIN2, DHTTYPE);
 DHT dht3(DHTPIN3, DHTTYPE);
 DHT dht4(DHTPIN4, DHTTYPE);
+}
 
+void beginDHT(){
+// Initial setup is done in fireDetection() and serial communication
+  dht1.begin();  // Initialize the DHT sensors
+  dht2.begin();
+  dht3.begin();
+  dht4.begin();
+  Serial.begin(9600);  // Start serial communication at 9600 baud
+  Serial.println("DHT22 sensor ready!");
+
+  delay(2000);
+}
 
 // Function to print temperature
 void printTemp1(float currentTemperature1) {
@@ -117,15 +131,8 @@ void fireDetection() {
 }
 
 void setup() {
-  // Initial setup is done in fireDetection() and serial communication
-  dht1.begin();  // Initialize the DHT sensors
-  dht2.begin();
-  dht3.begin();
-  dht4.begin();
-  Serial.begin(9600);  // Start serial communication at 9600 baud
-  Serial.println("DHT22 sensor ready!");
-
-  delay(2000);
+  definePINS();
+  beginDHT();
 }
 
 void loop() {
