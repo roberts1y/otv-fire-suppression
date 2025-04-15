@@ -2,6 +2,8 @@
 #include <Wire.h>
 #include "Enes100.h"
 #include "MotorControl.h"
+#include "Orientation.h"
+#include "Navigation.h"
 #include <math.h>
 
 const int TXPin = 12;
