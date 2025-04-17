@@ -11,6 +11,7 @@ servo1.writeMicroseconds(500);
 delay(3000);
 }
 
+//make sure you set this to spin in the opposite direction
 void dropping(){
 servo1.attach(9);
   
