@@ -18,13 +18,6 @@ void defineDHTPINS(int pin1, int pin2, int pin3, int pin4) {
 }
 
 
-
-DHT dht1(DHTPIN1, DHTTYPE);
-DHT dht2(DHTPIN2, DHTTYPE);
-DHT dht3(DHTPIN3, DHTTYPE);
-DHT dht4(DHTPIN4, DHTTYPE);
-}
-
 void beginDHT(){
 // Initial setup is done in fireDetection() and serial communication
   dht1.begin();  // Initialize the DHT sensors
