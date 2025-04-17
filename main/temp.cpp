@@ -111,11 +111,11 @@ void fireDetection() {
 
   if (isnan(prevTemperature4)) {
     prevTemperature4 = currentTemperature4;
-    fireCount++;
     Serial.println("Temp4 reading not acquired.");
   } else {
     if (currentTemperature4 > prevTemperature4) {
       Serial.println("Temp4 increased!");
+      fireCount++;
     } else {
       Serial.println("Temp4 did not increase.");
     }
@@ -123,11 +123,7 @@ void fireDetection() {
     prevTemperature4 = currentTemperature4;
   }
 
-  // Print the temperature readings
-  printTemp1(currentTemperature1);
-  printTemp2(currentTemperature2);
-  printTemp3(currentTemperature3);
-  printTemp4(currentTemperature4);
+  return fireCount;
 }
 
 void setup() {
