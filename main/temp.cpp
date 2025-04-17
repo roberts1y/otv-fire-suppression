@@ -1,15 +1,23 @@
 #include "DHT.h"  // Include the DHT sensor library
 
 
-void defineDHTPINS(){
-  // Define the pin for the DHT22 data line and the LED
-#define DHTPIN1 5
-#define DHTPIN2 6
-#define DHTPIN3 9
-#define DHTPIN4 10
+// Pointers to DHT objects
+DHT* dht1;
+DHT* dht2;
+DHT* dht3;
+DHT* dht4;
 
-// Define the sensor type (DHT22)
+void defineDHTPINS(int pin1, int pin2, int pin3, int pin4) {
+  // Define the sensor type (DHT22)
 #define DHTTYPE DHT22
+  
+  dht1 = new DHT(pin1, DHTTYPE);
+  dht2 = new DHT(pin2, DHTTYPE);
+  dht3 = new DHT(pin3, DHTTYPE);
+  dht4 = new DHT(pin4, DHTTYPE);
+}
+
+
 
 DHT dht1(DHTPIN1, DHTTYPE);
 DHT dht2(DHTPIN2, DHTTYPE);
@@ -122,16 +130,18 @@ void fireDetection() {
     printTemp4(currentTemperature4);  // Print temperature
     prevTemperature4 = currentTemperature4;
   }
-
+ // Print fire count at the end
+  Serial.print("🔥 Fires Detected: ");
+  Serial.println(fireCount);
   return fireCount;
 }
 
 void setup() {
-  definePINS();
+  defineDHTPINS();
   beginDHT();
 }
 
 void loop() {
   fireDetection();  // Read temperature and detect fire
-  delay(2000);      // Wait for 2 seconds before reading again
+  delay(5000);      // Wait for 2 seconds before reading again
 }
