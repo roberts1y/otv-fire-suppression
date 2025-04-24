@@ -72,7 +72,7 @@ void fireDetection() {
     prevTemperature1 = currentTemperature1;
     Serial.println("Temp1 reading not acquired.");
   } else {
-    if (currentTemperature1 > prevTemperature1) {
+    if (currentTemperature1 > prevTemperature1 + 2) {
       fireCount++;
       Serial.println("Temp1 increased!");
     } else {
@@ -86,7 +86,7 @@ void fireDetection() {
     prevTemperature2 = currentTemperature2;
     Serial.println("Temp2 reading not acquired.");
   } else {
-    if (currentTemperature2 > prevTemperature2) {
+    if (currentTemperature2 > prevTemperature2 + 2) {
       fireCount++;
       Serial.println("Temp2 increased!");
     } else {
@@ -100,7 +100,7 @@ void fireDetection() {
     prevTemperature3 = currentTemperature3;
     Serial.println("Temp3 reading not acquired.");
   } else {
-    if (currentTemperature3 > prevTemperature3) {
+    if (currentTemperature3 > prevTemperature3 + 2) {
       fireCount++;
       Serial.println("Temp3 increased!");
     } else {
@@ -114,7 +114,7 @@ void fireDetection() {
     prevTemperature4 = currentTemperature4;
     Serial.println("Temp4 reading not acquired.");
   } else {
-    if (currentTemperature4 > prevTemperature4) {
+    if (currentTemperature4 > prevTemperature4 + 2) {
       Serial.println("Temp4 increased!");
       fireCount++;
     } else {
@@ -124,17 +124,9 @@ void fireDetection() {
     prevTemperature4 = currentTemperature4;
   }
  // Print fire count at the end
-  Serial.print("🔥 Fires Detected: ");
-  Serial.println(fireCount);
+  
+  enes100.mission('NUM_CANDLES', fireCount + 1)
+  Enes100.println("🔥 Fires Detected: ");
+  Enes100.println(fireCount + 1);
   return fireCount;
-}
-
-void setup() {
-  defineDHTPINS();
-  beginDHT();
-}
-
-void loop() {
-  fireDetection();  // Read temperature and detect fire
-  delay(5000);      // Wait for 2 seconds before reading again
 }
