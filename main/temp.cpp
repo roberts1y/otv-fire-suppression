@@ -1,32 +1,37 @@
-#include "DHT.h"  // Include the DHT sensor library
+#include <DHT.h>
 
 
-// Pointers to DHT objects
-DHT* dht1;
-DHT* dht2;
-DHT* dht3;
-DHT* dht4;
-
-void defineDHTPINS(int pin1, int pin2, int pin3, int pin4) {
-  // Define the sensor type (DHT22)
+// Define sensor type
 #define DHTTYPE DHT22
-  
-  dht1 = new DHT(pin1, DHTTYPE);
-  dht2 = new DHT(pin2, DHTTYPE);
-  dht3 = new DHT(pin3, DHTTYPE);
-  dht4 = new DHT(pin4, DHTTYPE);
-}
 
+// Define pin connections
+#define pin1 2
+#define pin2 3
+#define pin3 4
+#define pin4 5
 
-void beginDHT(){
-// Initial setup is done in fireDetection() and serial communication
-  dht1.begin();  // Initialize the DHT sensors
+// Initialize DHT sensor objects
+DHT dht1(pin1, DHTTYPE);
+DHT dht2(pin2, DHTTYPE);
+DHT dht3(pin3, DHTTYPE);
+DHT dht4(pin4, DHTTYPE);
+
+// Variables to store previous temperature readings
+float prevTemperature1 = NAN;
+float prevTemperature2 = NAN;
+float prevTemperature3 = NAN;
+float prevTemperature4 = NAN;
+
+void beginDHT() {
+  // Initialize the DHT sensors
+  dht1.begin();
   dht2.begin();
   dht3.begin();
   dht4.begin();
-  Serial.begin(9600);  // Start serial communication at 9600 baud
-  Serial.println("DHT22 sensor ready!");
-
+  
+  Serial.begin(9600);
+  Serial.println("DHT22 sensors ready!");
+  
   delay(2000);
 }
 
@@ -125,8 +130,10 @@ void fireDetection() {
   }
  // Print fire count at the end
   
-  enes100.mission('NUM_CANDLES', fireCount + 1)
-  Enes100.println("🔥 Fires Detected: ");
-  Enes100.println(fireCount + 1);
+//   Enes100.mission('NUM_CANDLES', fireCount + 1)
+//   Enes100.println("🔥 Fires Detected: ");
+//   Enes100.println(fireCount + 1);
+ Serial.println(fireCount + 1);
   return fireCount;
 }
+
