@@ -5,154 +5,154 @@
 #include "Orientation.h"
 #include <math.h>
 
-const float positionTolerance = 0.1;  // meters
-const float obstacleTolerance = 5; //cm
-const float angleTolerance = 0.1;      // radians
+const float positionTolerance = 0.3;  // meters
+const float obstacleTolerance = 10;    // cm
+float angleTolerance = 0.1;     // radians
 
 const int trigPin1 = 0;
 const int echoPin1 = 0;
 const int trigPin2 = 0;
 const int echoPin2 = 0;
-const int trigPin3 = 0;
-const int echoPin3 = 0;
+#define  trigPin3 50
+#define echoPin3 51
 
 const int TXPin = 12;
 const int RXPin = 13;
+
 
 // === Perform basic obstacle avoidance maneuver ===
 void avoidObstacle() {
     Enes100.println("Avoiding obstacle...");
 
-    // Stop
-    moveForward(0);
-    delay(500);  // Wait for half a second to stop
+    stopAll();
+    delay(1000);
 
-    // Turn left for 90 degrees (fixed turn)
-    spinLeft(90);
-    delay(670);  // Turn for 1 second (adjust based on needs)
+    moveBackward(200);
+    delay(500);  // Adjust as needed
+    stopAll();
+    delay(250);
 
-    // Move forward again after avoiding the obstacle
-    moveForward(90);
-    delay(500);  // Drive for half a second
+    if(Enes100.getY() <= 1){
+        spinLeft(200);
+        delay(1000);
+    }
+    else{
+        spinRight(200);
+        delay(1000);
+    }
+    stopAll();
+    delay(250);
+    moveForward(200);
+    delay(1600);
+    stopAll();
 }
 
-// Move to (targetX, targetY) and face 0 radians
+// === Spin until robot faces a given theta ===
+void orientToTheta(float targetTheta) {
+    while (true) {
+        float currentTheta = Enes100.getTheta();
+        float dTheta = targetTheta - currentTheta;
+
+        if (abs(dTheta) < angleTolerance) {
+            stopAll();
+            break;
+        }
+
+        if (dTheta > 0) {
+            spinLeft(255);  // spinLeft turns counter-clockwise
+            delay(150);
+        } else {
+            spinRight(255); // spinRight turns clockwise
+            delay(180);
+        }
+    stopAll();
+    delay(100);
+    float Odistance = getDistance(trigPin3, echoPin3, 3);
+    Enes100.print("Distance: ");
+    Enes100.println(Odistance);
+
+    if (Odistance < obstacleTolerance && Odistance != 0) {
+        avoidObstacle();
+    }
+}
+}
+
+// === Move to a point (targetX, targetY) ===
 void goToPoint(float targetX, float targetY) {
     while (true) {
         float x = Enes100.getX();
         float y = Enes100.getY();
-        float theta = Enes100.getTheta();  // radians
+        float theta = Enes100.getTheta();
 
         float dx = targetX - x;
         float dy = targetY - y;
         float distance = sqrt(dx * dx + dy * dy);
 
-        // If the robot has reached the target position
         if (distance < positionTolerance) {
             moveForward(0);
             Enes100.println("Arrived at destination.");
             break;
         }
 
-        // Calculate the angle to the target
         float angleToTarget = atan2(dy, dx);
-        float dTheta = angleToTarget - theta;
 
-        // Adjust rotation speed based on how far the robot is from the target angle
-        if (abs(dTheta) > angleTolerance) {
-            // Robot needs to turn
-            if (dTheta > 0) {
-                spinLeft(90);
-            } else {
-                spinRight(90);
-            }
-        } else {
-            // Move forward after reaching the correct angle
-            moveForward(90);
+        float headingError = angleToTarget - Enes100.getTheta();
+        if (abs(headingError) > angleTolerance) {
+            orientToTheta(angleToTarget);
         }
 
-        if(getDistance(trigPin3, echoPin3, 1) < obstacleTolerance){
-            avoidObstacle();        
+        moveForward(200);
+        delay(100);
+        stopAll();
+        delay(100);
+
+
+        float Odistance = getDistance(trigPin3, echoPin3, 3);
+        Enes100.print("Distance: ");
+        Enes100.println(Odistance);
+
+        if (Odistance < obstacleTolerance && Odistance != 0) {
+            avoidObstacle();
         }
-        
+
     }
 }
 
 void setup() {
-  // Initialize ENES100 system
-  Enes100.begin("Fire Suppression", FIRE, 467, 1120, TXPin, RXPin);
-  // Set up motor control pins
-  setupMotors();
+    
+    setupMotors();
+    Enes100.begin("Fire Suppression", FIRE, 467, 1120, TXPin, RXPin);
+    Enes100.println("Hello :)");
+    Enes100.println("Only you can stop forest fires!");
+    delay(1000);
+    Enes100.println("Starting Mission...");
+    delay(500);
 }
 
 void loop() {
-
-  Enes100.println("Hello :)");
-
-  if(Enes100.getY()>1){
-
-    spinLeft(90);
-    while(true){
-    
-      if((Enes100.getTheta() <= (-1*PI/2 + angleTolerance)) && (Enes100.getTheta() >= (-1*PI/2 - angleTolerance))){
-        spinLeft(0);
-        break;
-      }
+    if (Enes100.getY() > 1) {
+        Enes100.println("Going to (0.4,0.5)");
+        delay(1000);
+        goToPoint(0.17, 0.30);
+        orientToTheta(-PI/2);
+    } else {
+        Enes100.println("Going to (0.4,1.5)");
+        delay(1000);
+        goToPoint(0.17, 1.72);
+        orientToTheta(PI/2);
     }
 
-    goToPoint(0.5, 0.5);
-  }
+    delay(3000);
+    Enes100.println("Arrived at Mission Site!");
 
-  else{
+    // goToPoint(2.9, 0.5);
 
-    spinLeft(90);
-    while(true){
-    
-      if((Enes100.getTheta() <= (1*PI/2 + angleTolerance)) && (Enes100.getTheta() >= (1*PI/2 - angleTolerance))){
-        spinLeft(0);
-        break;
-      }
-    }
+    // delay(3000);
 
-    goToPoint(0.5, 1.5);
+    // orientToTheta(0);  // Face forward again
 
-  }
-
-char orientation = getOrientation(trigPin1, trigPin2, echoPin1, echoPin2, 10);
-
-if(orientation == 'a'){
-  Enes100.mission(TOPOGRAPHY, TOP_A);
-}
-else if(orientation == 'b'){
-  Enes100.mission(TOPOGRAPHY, TOP_B);
-}
-else if(orientation == 'c'){
-  Enes100.mission(TOPOGRAPHY, TOP_C);
-}
-
-  // Insert Tao's code down
-
-
-  // Derrick' Code
-
-  
-  // Insert Tao's code up
-  goToPoint(2.75, 0.5);
-
-while(true){
-  if (abs(Enes100.getTheta()) > angleTolerance) {
-  
-    if (Enes100.getTheta() > 0) {
-      spinLeft(90);
-    }else if(Enes100.getTheta() < 0){
-      spinRight(90);
-    }
-    else{
-      break;
-    }
-  }
-}
-
-moveForward(255);
-
+    // moveForward(255);
+    // delay(3000);
+    // stopAll();
+    // delay(10000);
 }
