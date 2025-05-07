@@ -23,11 +23,11 @@ char getOrientation(int trigPin1,  int trigPin2, int echoPin1, int echoPin2, int
     int distance1 = getDistance(trigPin1, echoPin1, surveys); //right side
     int distance2 = getDistance(trigPin2, echoPin2, surveys); //left side
 
-    if (distance1 >= 8) {
+    if (distance1 > 11) {
         return 'a';
     }
 
-    else if (distance2 >= 6) {
+    else if (distance2 >= 9) {
         return 'c';
     }
 

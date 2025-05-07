@@ -63,28 +63,28 @@ void moveBackward(int speed) {
   analogWrite(RR_EN, speed);
 }
 
-void spinLeft(int speed) {
+void spinRight(int speed) {
   digitalWrite(LF_IN1, LOW); digitalWrite(LF_IN2, HIGH);
   digitalWrite(LR_IN1, LOW); digitalWrite(LR_IN2, HIGH);
-  digitalWrite(RF_IN1, LOW); digitalWrite(RF_IN2, HIGH);
-  digitalWrite(RR_IN1, LOW); digitalWrite(RR_IN2, HIGH);
+  digitalWrite(RF_IN1, HIGH); digitalWrite(RF_IN2, LOW);
+  digitalWrite(RR_IN1, HIGH); digitalWrite(RR_IN2, LOW);
 
-  analogWrite(LF_EN, -1*(speed));
-  analogWrite(LR_EN, -1*(speed));
+  analogWrite(LF_EN, speed);
+  analogWrite(LR_EN, speed);
   analogWrite(RF_EN, speed);
   analogWrite(RR_EN, speed);
 }
 
-void spinRight(int speed) {
-  digitalWrite(LF_IN1, LOW); digitalWrite(LF_IN2, HIGH);
-  digitalWrite(LR_IN1, LOW); digitalWrite(LR_IN2, HIGH);
+void spinLeft(int speed) {
+  digitalWrite(LF_IN1, HIGH); digitalWrite(LF_IN2, LOW);
+  digitalWrite(LR_IN1, HIGH); digitalWrite(LR_IN2, LOW);
   digitalWrite(RF_IN1, LOW); digitalWrite(RF_IN2, HIGH);
   digitalWrite(RR_IN1, LOW); digitalWrite(RR_IN2, HIGH);
 
   analogWrite(LF_EN, speed);
   analogWrite(LR_EN, speed);
-  analogWrite(RF_EN, -1*(speed));
-  analogWrite(RR_EN, -1*(speed));
+  analogWrite(RF_EN, speed);
+  analogWrite(RR_EN, speed);
 }
 
 

@@ -1,6 +1,8 @@
 #include <math.h>
 #include "Arduino.h"
 #include "Enes100.h"
+#include "MotorControl.h"
+#include "Orientation.h"
 
 const float positionTolerance = 0.1;  // meters
 const float obstacleTolerance = 5; //cm
@@ -9,6 +11,35 @@ const float angleTolerance = 0.1;      // radians
 const int trigPin3 = 8;
 const int echoPin3 = 9;
 
+const int TXPin = 12;
+const int RXPin = 13;
+
+void BeginEnes100() {
+
+    Enes100.begin("Fire Suppression", FIRE, 467, 1120, TXPin, RXPin);
+
+}
+
+void Enes100Print(char* phrase){
+    Enes100.println(phrase);
+}
+
+// === Perform basic obstacle avoidance maneuver ===
+void avoidObstacle() {
+    Enes100.println("Avoiding obstacle...");
+
+    // Stop
+    moveForward(0);
+    delay(500);  // Wait for half a second to stop
+
+    // Turn left for 90 degrees (fixed turn)
+    spinLeft(90);
+    delay(670);  // Turn for 1 second (adjust based on needs)
+
+    // Move forward again after avoiding the obstacle
+    moveForward(90);
+    delay(500);  // Drive for half a second
+}
 
 // Move to (targetX, targetY) and face 0 radians
 void goToPoint(float targetX, float targetY) {
@@ -52,19 +83,4 @@ void goToPoint(float targetX, float targetY) {
     }
 }
 
-// === Perform basic obstacle avoidance maneuver ===
-void avoidObstacle() {
-    Enes100.println("Avoiding obstacle...");
 
-    // Stop
-    moveForward(0);
-    delay(500);  // Wait for half a second to stop
-
-    // Turn left for 90 degrees (fixed turn)
-    spinLeft(90);
-    delay(670);  // Turn for 1 second (adjust based on needs)
-
-    // Move forward again after avoiding the obstacle
-    moveForward(90);
-    delay(500);  // Drive for half a second
-}
