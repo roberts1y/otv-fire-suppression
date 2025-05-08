@@ -5,7 +5,6 @@
 #include "Orientation.h"
 #include <math.h>
 #include "temp.h"
-#include "platformLift.h"
 
 const float positionTolerance = 0.3;  // meters
 const float obstacleTolerance = 10;    // cm
@@ -124,58 +123,60 @@ void setup() {
     
     setupMotors();
     Serial.begin(9600);
-    // Enes100.begin("Fire Suppression", FIRE, 467, 1120, TXPin, RXPin);
-    // Enes100.println("Hello :)");
-    // Enes100.println("Only you can stop forest fires!");
-    // delay(1000);
-    // Enes100.println("Starting Mission...");
-    // delay(500);
+    Enes100.begin("Fire Suppression", FIRE, 467, 1120, TXPin, RXPin);
+    Enes100.println("Hello :)");
+    Enes100.println("Only you can stop forest fires!");
+    delay(1000);
+    Enes100.println("Starting Mission...");
+    delay(500);
 }
 
 void loop() {
-    // if (Enes100.getY() > 1) {
-    //     Enes100.println("Going to (0.5,0.5)");
-    //     delay(1000);
-    //     goToPoint(0.2, 0.30);
-    // } else {
-    //     Enes100.println("Going to (0.5,1.5)");
-    //     delay(1000);
-    //     goToPoint(0.2, 1.72);
-    // }
+    if (Enes100.getY() > 1) {
+        Enes100.println("Going to (0.5,0.5)");
+        delay(1000);
+        goToPoint(0.2, 0.30);
+    } else {
+        Enes100.println("Going to (0.5,1.5)");
+        delay(1000);
+        goToPoint(0.2, 1.72);
+    }
 
-    // Enes100.println("Arrived at Mission Site!");
-    // delay(1000);
+    Enes100.println("Arrived at Mission Site!");
+    delay(1000);
 
-    // char orientation = getOrientation(trigPin1, trigPin2, echoPin1, echoPin2, 5);
-    // if(orientation = 'a'){
-    //     Enes100.mission(TOPOGRAPHY, TOP_A);
-    //     Enes100.println("Orientation A detected!");
-    // }
-    // else if(orientation = 'b'){
-    //     Enes100.mission(TOPOGRAPHY, TOP_B);
-    //     Enes100.println("Orientation B detected!");
-    // }
-    // else{
-    //     Enes100.mission(TOPOGRAPHY, TOP_C);
-    //     Enes100.println("Orientation C detected!");
-    // }
+    char orientation = getOrientation(trigPin1, trigPin2, echoPin1, echoPin2, 5);
+    if(orientation = 'a'){
+        Enes100.mission(TOPOGRAPHY, TOP_A);
+        Enes100.println("Orientation A detected!");
+    }
+    else if(orientation = 'b'){
+        Enes100.mission(TOPOGRAPHY, TOP_B);
+        Enes100.println("Orientation B detected!");
+    }
+    else{
+        Enes100.mission(TOPOGRAPHY, TOP_C);
+        Enes100.println("Orientation C detected!");
+    }
 
-    // dropping();
-    int numFlames = fireDetection() + 1;
-    Serial.print("Flames: ");
-    Serial.println(numFlames);
+    int numFlames = fireDetection();
+    Enes100.print("Flames Detected: ");
+    Enes100.println(numFlames);
+    Enes100.mission(NUM_CANDLES, numFlames);
+
+    moveBackward(255);
+    delay(1500);
+    stopAll();
+
+
+    goToPoint(2.9, 0.5);
+
     delay(3000);
-    // Enes100.mission(NUM_CANDLES, numFlames);
 
+    orientToTheta(0);  // Face forward again
 
-    // goToPoint(2.9, 0.5);
-
-    // delay(3000);
-
-    // orientToTheta(0);  // Face forward again
-
-    // moveForward(255);
-    // delay(3000);
-    // stopAll();
-    // delay(10000);
+    moveForward(255);
+    delay(3000);
+    stopAll();
+    delay(10000);
 }

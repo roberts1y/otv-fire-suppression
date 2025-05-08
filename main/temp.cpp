@@ -10,7 +10,7 @@
 #define pin3 45
 #define pin4 43
 
-const int tempThreshold = 60;
+const int tempThreshold = 30;
 
 // Initialize DHT sensor objects
 DHT dht1(pin1, DHTTYPE);
@@ -53,10 +53,11 @@ void printTemp4(float currentTemperature4) {
 
 // Fire detection function
 int fireDetection() {
+  beginDHT();
   int fireCount=1;
-  
+  delay(20000);
   float currentTemperature1 = dht1.readTemperature();
-  float currentTemperature2 = dht2.readTemperature();
+  float currentTemperature2 = dht2.readTemperature() - 18;
   float currentTemperature3 = dht3.readTemperature();
   float currentTemperature4 = dht4.readTemperature();
 
