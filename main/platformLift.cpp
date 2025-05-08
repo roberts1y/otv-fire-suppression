@@ -4,11 +4,9 @@
 Servo servo;
 
 
-#define servoPin 41;
-
 
 void setup() {
-  servo.attach(servoPin);
+  servo.attach(41);
 
 }
 
