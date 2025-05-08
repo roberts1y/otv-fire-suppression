@@ -4,7 +4,7 @@
 Servo servo;
 
 
-#define servoPin 41
+#define servoPin 41;
 
 
 void setup() {
