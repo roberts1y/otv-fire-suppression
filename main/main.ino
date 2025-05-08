@@ -29,22 +29,22 @@ void avoidObstacle() {
     delay(1000);
 
     moveBackward(200);
-    delay(500);  // Adjust as needed
+    delay(1000);  // Adjust as needed
     stopAll();
     delay(250);
 
     if(Enes100.getY() <= 1){
-        spinLeft(200);
+        spinLeft(255);
         delay(1000);
     }
     else{
-        spinRight(200);
+        spinRight(255);
         delay(1000);
     }
     stopAll();
     delay(250);
-    moveForward(200);
-    delay(1600);
+    moveForward(255);
+    delay(2000);
     stopAll();
 }
 
@@ -61,16 +61,14 @@ void orientToTheta(float targetTheta) {
 
         if (dTheta > 0) {
             spinLeft(255);  // spinLeft turns counter-clockwise
-            delay(400);
+            delay(200);
         } else {
             spinRight(255); // spinRight turns clockwise
-            delay(350);
+            delay(150);
         }
     stopAll();
     delay(100);
     float Odistance = getDistance(trigPin3, echoPin3, 3);
-    Enes100.print("Distance: ");
-    Enes100.println(Odistance);
 
     if (Odistance < obstacleTolerance && Odistance != 0) {
         avoidObstacle();
@@ -142,12 +140,12 @@ void loop() {
         goToPoint(0.2, 1.72);
     }
 
+    delay(1000);
     moveForward(255);
-    delay(250);
+    delay(5000);
     stopAll();
     
     Enes100.println("Arrived at Mission Site!");
-    delay(1000);
 
     char orientation = getOrientation(trigPin1, trigPin2, echoPin1, echoPin2, 5);
     if(orientation = 'a'){
@@ -169,7 +167,7 @@ void loop() {
     Enes100.mission(NUM_CANDLES, numFlames);
 
     moveBackward(255);
-    delay(1500);
+    delay(2500);
     stopAll();
 
 
