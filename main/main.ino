@@ -142,6 +142,10 @@ void loop() {
         goToPoint(0.2, 1.72);
     }
 
+    moveForward(255);
+    delay(250);
+    stopAll();
+    
     Enes100.println("Arrived at Mission Site!");
     delay(1000);
 
