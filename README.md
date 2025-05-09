@@ -2,10 +2,10 @@
 
 <table>
   <tr>
+    <td><img src="assets/solo.jpeg" alt="Solo View" width="250"/></td>
     <td><img src="assets/top.jpeg" alt="Top View" width="250"/></td>
     <td><img src="assets/side.jpeg" alt="Side View" width="250"/></td>
-    <td><img src="assets/solo.jpeg" alt="Solo View" width="250"/></td>
-    <td><img src="assets/solo.jpeg" alt="OTV Solo" width="250"/></td>
+    <td><img src="assets/pedestal.jpeg" alt="pedestal" width="250"/></td>
   </tr>
 </table>
 
