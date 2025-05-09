@@ -1,59 +1,76 @@
 # 🔥 Fire Suppression Over Terrain Vehicle (OTV) 🚒🌲
 
-![OTV In Action](images/otv-action1.jpg)
-> _An autonomous firefighting robot designed and built at the University of Maryland._
+![OTV Solo](assets/solo.jpeg)
+> _An autonomous fire-fighting robot built for the debut Fire Suppression Challenge at the University of Maryland._
 
 [![Course: ENES100](https://img.shields.io/badge/Course-ENES100-red.svg)](#)
-[![Arduino-Powered](https://img.shields.io/badge/Arduino-UNO-blue.svg)](#)
+[![Arduino MEGA](https://img.shields.io/badge/Controller-Arduino%20MEGA-blue.svg)](#)
 [![Made at UMD](https://img.shields.io/badge/Made%20at-UMD-ffcc00.svg)](#)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Mission: Fire Suppression](https://img.shields.io/badge/Mission-Fire%20Suppression-critical.svg)](#)
 
 ---
 
-## 🔧 About the Project
+## 🏁 What is This?
 
-The **Fire Suppression Over Terrain Vehicle (OTV)** is the final engineering design project for **ENES100** at the **University of Maryland**. The vehicle autonomously navigates a terrain-based obstacle course and suppresses fire upon detection.
+The **Fire Suppression Over Terrain Vehicle (OTV)** was designed and built for the **first-ever Fire Suppression Challenge**, a mission introduced in the **ENES100: Engineering Design** course at the **University of Maryland**.
 
-The system uses **DHT22 temperature sensors** to detect elevated temperatures indicating fire and deploys a **servo-driven smothering plane** to extinguish the flames—no water required!
+Teams were challenged to design autonomous vehicles that could detect and suppress real flames while traversing randomized terrain and completing precision-based tasks.
 
 ---
 
-## ⚙️ Features
+## 🎯 Challenge Objectives
 
-- 🌡️ **Fire Detection via DHT22**: Measures air temperature to detect localized heat spikes.
-- 🧠 **Autonomous Navigation**: Onboard logic for obstacle avoidance and decision-making.
-- 🔥 **Servo-Controlled Suppression**: A smothering plane is lowered directly over the flame using servos.
-- 💻 **Arduino Integration**: Entire system powered and managed by an Arduino UNO.
+✔️ Navigate within **150 mm** of the fire site  
+✔️ Identify and **report fire orientation** (A, B, or C)  
+✔️ Measure and **report number of active flames**  
+✔️ Suppress **all flames except the middle one**  
+✔️ Clear all **three terrain obstacles**  
+✔️ Enter the **destination zone**
+
+> Fires were represented using open-flame candles mounted in a variable-height pedestal, simulating post-impact electrical fires.
+
+---
+
+## 🔧 Our Vehicle Design
+
+The OTV uses **DHT22 temperature sensors** to detect heat from candle flames. When fire is detected, a **servo-driven smothering plane** is deployed to extinguish it—no chemicals or water needed. An **Arduino MEGA** handles all sensing, logic, and actuation.
+
+---
+
+## ⚙️ Core Features
+
+- 🌡️ **DHT22 Fire Detection**: Captures real-time temperature readings
+- 🔁 **Servo-Controlled Smothering Plane**: Mechanically suppresses flames
+- 🚗 **Obstacle Navigation**: Capable of terrain traversal
+- 🧠 **Fully Autonomous Logic**: Programmed entirely on Arduino MEGA
 
 ---
 
 ## 📸 Gallery
 
-| Vehicle Assembly | Terrain Test | Temperature Detection | Suppression Activated |
-|------------------|--------------|------------------------|------------------------|
 | ![](images/otv-build.jpg) | ![](images/otv-test.jpg) | ![](images/otv-temp.jpg) | ![](images/otv-suppress.jpg) |
 
 ---
 
-## 📦 Hardware Components
+## 🧰 Hardware Components
 
-- Arduino UNO
-- DHT22 temperature sensors
-- Servo motors
-- Smothering plane mechanism
-- Motor driver + drive motors
-- Rechargeable battery pack
-- Custom terrain-ready chassis
+- **Arduino MEGA**
+- **DHT22** temperature sensors
+- Continuous rotation **servo motors**
+- Custom-built **smothering plane mechanism**
+- **Motor driver board** + drive motors
+- **Rechargeable LiPo battery**
+- Laser-cut and 3D-printed terrain-ready chassis
 
 ---
 
 ## 🧠 Software Overview
 
-Developed in C++ using the Arduino IDE, the code includes:
+Written in Arduino C++, the program includes:
 
-- DHT22 temperature polling
-- Heat threshold-based decision logic
-- Smothering plane activation via servo
-- Obstacle detection and simple navigation
+- Sensor polling from multiple DHT22s
+- Flame detection using calibrated thresholds
+- Servo actuation logic to lower the smothering plane
+- Obstacle-aware navigation routines
 
 ---
