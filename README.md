@@ -1,6 +1,7 @@
 # 🔥 Fire Suppression Over Terrain Vehicle (OTV) 🚒🌲
 
-![OTV Solo](assets/solo.jpeg)
+<img src="assets/solo.jpeg" alt="OTV Solo" width="400"/>
+
 > _An autonomous fire-fighting robot built for the debut Fire Suppression Challenge at the University of Maryland._
 
 [![Course: ENES100](https://img.shields.io/badge/Course-ENES100-red.svg)](#)
@@ -48,7 +49,13 @@ The OTV uses **DHT22 temperature sensors** to detect heat from candle flames. Wh
 
 ## 📸 Gallery
 
-| ![](images/otv-build.jpg) | ![](images/otv-test.jpg) | ![](images/otv-temp.jpg) | ![](images/otv-suppress.jpg) |
+<table>
+  <tr>
+    <td><img src="assets/top.jpeg" alt="Top View" width="250"/></td>
+    <td><img src="assets/side.jpeg" alt="Side View" width="250"/></td>
+    <td><img src="assets/solo.jpeg" alt="Solo View" width="250"/></td>
+  </tr>
+</table>
 
 ---
 
