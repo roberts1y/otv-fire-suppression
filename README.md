@@ -1,6 +1,13 @@
 # 🔥 Fire Suppression Over Terrain Vehicle (OTV) 🚒🌲
 
-<img src="assets/solo.jpeg" alt="OTV Solo" width="400"/>
+<table>
+  <tr>
+    <td><img src="assets/top.jpeg" alt="Top View" width="250"/></td>
+    <td><img src="assets/side.jpeg" alt="Side View" width="250"/></td>
+    <td><img src="assets/solo.jpeg" alt="Solo View" width="250"/></td>
+    <td></td><img src="assets/solo.jpeg" alt="OTV Solo" width="250"/></td>
+  </tr>
+</table>
 
 > _An autonomous fire-fighting robot built for the debut Fire Suppression Challenge at the University of Maryland._
 
@@ -44,18 +51,6 @@ The OTV uses **DHT22 temperature sensors** to detect heat from candle flames. Wh
 - 🔁 **Servo-Controlled Smothering Plane**: Mechanically suppresses flames
 - 🚗 **Obstacle Navigation**: Capable of terrain traversal
 - 🧠 **Fully Autonomous Logic**: Programmed entirely on Arduino MEGA
-
----
-
-## 📸 Gallery
-
-<table>
-  <tr>
-    <td><img src="assets/top.jpeg" alt="Top View" width="250"/></td>
-    <td><img src="assets/side.jpeg" alt="Side View" width="250"/></td>
-    <td><img src="assets/solo.jpeg" alt="Solo View" width="250"/></td>
-  </tr>
-</table>
 
 ---
 
